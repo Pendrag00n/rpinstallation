@@ -17,8 +17,26 @@ sudo /usr/bin/curl -fsSL https://raw.githubusercontent.com/filebrowser/get/maste
 #
 # SYSTEM CONFIGURATION
 #
+# STOP SERVICES
+#
+sudo /usr/bin/systemctl stop mysterium-node.service && 
+sudo /usr/bin/systemctl stop pihole-FTL.service && 
+#
+# USER CREATION AND PERMISSION GRANTING
+#
+sudo /usr/sbin/adduser --system --group --HOME /var/lib/filebrowser/ --shell /usr/sbin/nologin --no-create-home filebrowser
+sudo /usr/sbin/addgroup -S filebrowser
+sudo /usr/sbin/adduser -S -s /sbin/nologin -H -h /var/lib/filebrowser -G filebrowser filebrowser
+sudo chown -Rc filebrowser:filebrowser /var/lib/filebrowser
+#
+# MOUNT DEVICES AND REPLACE DEFAULT CONFIGURATION FILES WITH PRODUCTION ONES
+#
 sudo echo "UUID=d6689ad7-957a-4bfa-ab9b-5122a7ba077e /media/DataTraveler auto nosuid,nodev,nofail 0 0" >> /etc/fstab && 
-sudo /usr/bin/systemctl stop mysterium-node.service &&
 sudo /usr/bin/rm -rf /var/lib/mysterium-node/keystore && /usr/bin/mv -r keystore/ /var/lib/mysterium-node/ &&
-sudo /usr/bin/systemctl enable mysterium-node.service && sudo /usr/bin/systemctl start mysterium-node.service &&
 sudo /usr/bin/mv filebrowser.service /etc/systemd/filebrowser.service &&
+sudo /usr/bin/mv .filebrowser.toml /etc/filebrowser/
+#
+# ENABLE AND START SERVICES
+#
+sudo /usr/bin/systemctl enable mysterium-node.service && sudo /usr/bin/systemctl start mysterium-node.service &&
+sudo /usr/bin/systemctl enable stop pihole-FTL.service && sudo /usr/bin/systemctl start stop pihole-FTL.service &&
