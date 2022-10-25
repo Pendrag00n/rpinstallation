@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/sh
 # THIS SCRIPT SHOULD BE RAN IN INSIDE THE "nave" FOLDER!!
 #
 sudo /usr/bin/apt update && 
@@ -24,19 +24,23 @@ sudo /usr/bin/systemctl stop pihole-FTL.service &&
 #
 # USER CREATION AND PERMISSION GRANTING
 #
-sudo /usr/sbin/adduser --system --group --HOME /var/lib/filebrowser/ --shell /usr/sbin/nologin --no-create-home filebrowser
-sudo /usr/sbin/addgroup -S filebrowser
-sudo /usr/sbin/adduser -S -s /sbin/nologin -H -h /var/lib/filebrowser -G filebrowser filebrowser
-sudo chown -Rc filebrowser:filebrowser /var/lib/filebrowser
+sudo /usr/sbin/adduser --system --group --HOME /var/lib/filebrowser/ --shell /usr/sbin/nologin --no-create-home filebrowser && 
+sudo /usr/sbin/addgroup -S filebrowser && 
+sudo /usr/sbin/adduser -S -s /sbin/nologin -H -h /var/lib/filebrowser -G filebrowser filebrowser && 
+sudo /usr/bin/chown -Rc filebrowser:filebrowser /var/lib/filebrowser && 
+sudo /usr/bin/touch /var/log/filebrowser.log && sudo /usr/bin/chown -c filebrowser:filebrowser /var/log/filebrowser.log && 
 #
 # MOUNT DEVICES AND REPLACE DEFAULT CONFIGURATION FILES WITH PRODUCTION ONES
 #
 sudo echo "UUID=d6689ad7-957a-4bfa-ab9b-5122a7ba077e /media/DataTraveler auto nosuid,nodev,nofail 0 0" >> /etc/fstab && 
-sudo /usr/bin/rm -rf /var/lib/mysterium-node/keystore && /usr/bin/mv -r keystore/ /var/lib/mysterium-node/ &&
-sudo /usr/bin/mv filebrowser.service /etc/systemd/filebrowser.service &&
-sudo /usr/bin/mv .filebrowser.toml /etc/filebrowser/
+sudo /usr/bin/rm /etc/motd && sudo /usr/bin/cp motd /etc/motd && 
+sudo /usr/bin/rm -rf /var/lib/mysterium-node/keystore && 
+sudo /usr/bin/cp -r keystore/ /var/lib/mysterium-node/ &&
+sudo /usr/bin/cp filebrowser.service /etc/systemd/filebrowser.service &&
+sudo /usr/bin/cp .filebrowser.toml /etc/filebrowser/ && 
 #
 # ENABLE AND START SERVICES
 #
+sudo /usr/bin/systemctl edit --force --full filebrowser && 
 sudo /usr/bin/systemctl enable mysterium-node.service && sudo /usr/bin/systemctl start mysterium-node.service &&
 sudo /usr/bin/systemctl enable stop pihole-FTL.service && sudo /usr/bin/systemctl start stop pihole-FTL.service &&
