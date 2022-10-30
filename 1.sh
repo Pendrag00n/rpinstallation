@@ -45,7 +45,7 @@ else
 sudo /usr/bin/cp -r keystore/ /var/lib/mysterium-node/
 fi
 sudo /usr/bin/cp filebrowser.service /etc/systemd/filebrowser.service &&
-sudo /usr/bin/cp .filebrowser.toml /etc/filebrowser/ && 
+sudo /usr/bin/mkdir /etc/filebrowser/ && sudo /usr/bin/cp .filebrowser.toml /etc/filebrowser/ && 
 #
 # ENABLE AND START SERVICES
 #
