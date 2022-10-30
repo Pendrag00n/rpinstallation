@@ -6,7 +6,7 @@ sudo /usr/bin/apt upgrade -y &&
 #
 # INSTALL PACKAGES FROM RASPBIAN REP
 #
-sudo /usr/bin/apt install curl git net-tools neofetch ufw fail2ban -y && 
+sudo /usr/bin/apt install curl git net-tools neofetch ufw fail2ban speedtest-cli -y && 
 #
 # INSTALL OTHER PACKAGES
 #
