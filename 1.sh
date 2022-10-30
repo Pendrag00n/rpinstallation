@@ -37,14 +37,14 @@ sudo echo "UUID=d6689ad7-957a-4bfa-ab9b-5122a7ba077e /media/DataTraveler auto no
 if [ -f "/etc/motd" ]; then
 sudo /usr/bin/rm /etc/motd 
 else
-sudo /usr/bin/cp motd /etc/motd
+sudo /usr/bin/cp motd /etc/
 fi
 if [ -d "/var/lib/mysterium-node/keystore/" ]; then
 sudo /usr/bin/rm -rf /var/lib/mysterium-node/keystore
 else
 sudo /usr/bin/cp -r keystore/ /var/lib/mysterium-node/
 fi
-sudo /usr/bin/cp filebrowser.service /etc/systemd/filebrowser.service &&
+sudo /usr/bin/cp filebrowser.service /etc/systemd/system/ &&
 sudo /usr/bin/mkdir /etc/filebrowser/ && sudo /usr/bin/cp .filebrowser.toml /etc/filebrowser/ && 
 #
 # ENABLE AND START SERVICES
