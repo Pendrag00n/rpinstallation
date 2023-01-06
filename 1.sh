@@ -6,7 +6,7 @@ sudo /usr/bin/apt upgrade -y &&
 #
 # INSTALL PACKAGES FROM RASPBIAN REP
 #
-sudo /usr/bin/apt install curl git net-tools neofetch ufw fail2ban speedtest-cli -y && 
+sudo /usr/bin/apt install curl git net-tools neofetch ufw fail2ban speedtest-cli lshw duf -y && 
 #
 # INSTALL OTHER PACKAGES
 #
@@ -33,7 +33,8 @@ sudo /usr/bin/touch /var/log/filebrowser.log && sudo /usr/bin/chown -c filebrows
 #
 # MOUNT DEVICES AND REPLACE DEFAULT CONFIGURATION FILES WITH PRODUCTION ONES
 #
-sudo echo "UUID=d6689ad7-957a-4bfa-ab9b-5122a7ba077e /media/DataTraveler auto nosuid,nodev,nofail 0 0" >> /etc/fstab && 
+sudo echo "UUID=d6689ad7-957a-4bfa-ab9b-5122a7ba077e /mnt/usb/DataTraveler auto nosuid,nodev,nofail 0 0" >> /etc/fstab && 
+sudo echo "UUID=b76bf92f-ec3a-40ba-b50c-c498f3dc9ac3 /mnt/usb/TOSHIBA auto nosuid,nodev,nofail 0 0" >> /etc/fstab && 
 if [ -f "/etc/motd" ]; then
 sudo /usr/bin/rm /etc/motd 
 else
